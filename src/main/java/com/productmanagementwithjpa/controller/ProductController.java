@@ -1,5 +1,6 @@
 package com.productmanagementwithjpa.controller;
 
+import com.productmanagementwithjpa.entity.Product;
 import com.productmanagementwithjpa.entity.ProductRequest;
 import com.productmanagementwithjpa.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ public class ProductController {
     }
     @GetMapping("/")
     public String displayProducts(){
+        System.out.println(this.productRepository.findAll());
         return "all-product";
     }
     @GetMapping("/create")
@@ -25,6 +27,16 @@ public class ProductController {
 
     @PostMapping("/create-product")
     public String handleCreateProduct(ProductRequest productRequest){
+        Product productToCreate = new Product();
+
+        //transfer information from request to entity
+        productToCreate.setName(productRequest.getName());
+        productToCreate.setPrice(productToCreate.getPrice());
+        productToCreate.setQuantity(productToCreate.getQuantity());
+        productToCreate.setImageUrl(productRequest.getImageUrl());
+
+
+        this.productRepository.save(productToCreate);
         //do stuff with the product here
         return "redirect:/";
     }

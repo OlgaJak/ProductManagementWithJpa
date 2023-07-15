@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ProductController {
     @GetMapping("/")
     public String displayProducts(){
-        return "all-products";
+        return "all-product";
+    }
+    @GetMapping("/create")
+    public String displayAddProductPage(){
+        return "add-product";
     }
 }

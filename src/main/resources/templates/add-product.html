@@ -12,27 +12,28 @@
 <main class="container-fluid">
   <h3 class="m-2 p-2">Add Product</h3>
   <section class="container">
+
     <!--rest of code goes here-->
-    <form class="text-primary">
+    <form class="tex-primary" action="/create-product" method="post">
 
       <div class="input-group mb-2 p-2">
         <label class="input-group-text">Product Name</label>
-        <input type="text" required minlength="2" class="form-control">
+        <input name="name" type="text" required minlength="2" class="form-control">
       </div>
 
       <div class="input-group mb-2 p-2">
         <label class="input-group-text">Price</label>
-        <input step="0.01" type="number" required class="form-control">
+        <input name="price" step="0.01" type="number" required class="form-control">
       </div>
 
       <div class="input-group mb-2 p-2">
         <label class="input-group-text">Quantity</label>
-        <input type="number" step="0.01" class="form-control">
+        <input name="quantity" type="number" step="0.01" class="form-control">
       </div>
 
       <div class="input-group mb-2 p-2">
         <label class="input-group-text">Image Url</label>
-        <input type="url" class="form-control">
+        <input name="imageUrl" type="url" class="form-control">
       </div>
 
 

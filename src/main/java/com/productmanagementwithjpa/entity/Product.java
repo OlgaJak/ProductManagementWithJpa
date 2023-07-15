@@ -1,5 +1,6 @@
 package com.productmanagementwithjpa.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
 public class Product {
     @Id
@@ -21,11 +22,15 @@ public class Product {
     private Double quantity;
     private String imageUrl;
 
-    private Timestamp createdAt;
+    private Timestamp createdAt;   //the date when it was created
+    private Timestamp lastUpdated;
 
+    public Product() {
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 
     @PrePersist
     public void beforeSave(){
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.lastUpdated = new Timestamp(System.currentTimeMillis());  //it's just a date when you made the stuff
     }
 }

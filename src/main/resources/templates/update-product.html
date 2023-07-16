@@ -15,7 +15,7 @@
   <section class="container row">
 
     <div class="col-3 m-2" style="width:400px">
-      <img style="width: 400px" th:src="${product.imageUrl}">
+      <img style="width: 400px" th:src="${product.imageUrl}" alt="Image">
 
       <form th:action="@{/product/update}" th:object="${product}" method="post">
         <input type="hidden" th:field="*{id}" />
@@ -50,7 +50,7 @@
 
 
         <button type="submit" class="btn btn-primary">Update</button>
-      </form>
+
     </div>
   </section>
 </main>

@@ -13,11 +13,11 @@
     <h3 class="n-2 p-3">View product details</h3>
     <section class="container row">
         <div class="col-3 m-2" style="width:400px">
-            <img style="width: 400px" th:src="${product.getImageUrl()}">
+            <img style="width: 400px" th:src="${product.getImageUrl()}" alt="Image">
             <h4 th:text="${product.getName()}"></h4>
             <p>
                 <span th:text="${product.getQuantity() + 'items left'}"></span>
             </p>
-            <p th:text="${'Created on: ' + product.getCreatedAt()}"><p>
+            <p th:text="${'Created on: ' + product.getCreatedAt()}"><p></p><div
 </body>
 </html>

@@ -5,6 +5,7 @@ import com.productmanagementwithjpa.entity.ProductRequest;
 import com.productmanagementwithjpa.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -16,9 +17,10 @@ public class ProductController {
         this.productRepository = productRepository;
     }
     @GetMapping("/")
-    public String displayProducts(){
+    public String displayProducts(Model model){
+        model.addAttribute("products",this.productRepository.findAll());
         System.out.println(this.productRepository.findAll());
-        return "all-product";
+        return "all-products";
     }
     @GetMapping("/create")
     public String displayAddProductPage(){

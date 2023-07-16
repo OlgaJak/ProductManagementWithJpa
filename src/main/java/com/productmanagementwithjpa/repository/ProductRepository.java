@@ -13,12 +13,13 @@ import java.util.List;
 public interface ProductRepository extends CrudRepository<Product, Long> {
 //public List<Product> getAllBy();
 
-    public List<Product> findProductByNameLike(String name);
+    List<Product> findProductByNameLike(String name);
 
-    public List<Product> findProductByPriceBetween(double start, double end);
-    public  Product findProductById(Long id);
+    List<Product> findProductByPriceBetween(double start, double end);
+    Product findProductById(Long id);
 
-    void deleteProductById(Long id);
+    Product deleteProductById(Long id);
+
 
 
 }

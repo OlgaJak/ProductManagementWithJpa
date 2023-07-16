@@ -40,7 +40,6 @@ public class ProductController {
         productToCreate.setQuantity(productRequest.getQuantity());
         productToCreate.setImageUrl(productRequest.getImageUrl());
 
-
         this.productRepository.save(productToCreate);
         //do stuff with the product here
         return "redirect:/";
@@ -54,15 +53,17 @@ public class ProductController {
         return "product-details";
     }
 
-
-
-    @DeleteMapping("/product/delete/{id}")
-    public String deleteProduct(@PathVariable("id") Long id) {
-        this.productRepository.deleteProductById(id);
+    @GetMapping("/product/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        this.productRepository.deleteById(id);
         return "redirect:/";
     }
 
-
+//    @DeleteMapping("/product/delete/{id}")
+//    public String deleteProduct(@PathVariable("id") Long id) {
+//        this.productRepository.deleteProductById(id);
+//        return "redirect:/";
+//    }
 
 
 //    @GetMapping("/delete/{id}")

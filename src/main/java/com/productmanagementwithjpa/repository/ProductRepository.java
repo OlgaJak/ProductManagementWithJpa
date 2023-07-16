@@ -11,14 +11,14 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
-//public List<Product> getAllBy();
+//public List<Product> getAllBy();-isn't working
 
-    List<Product> findProductByNameLike(String name);
+//    List<Product> findProductByNameLike(String name);
 
-    List<Product> findProductByPriceBetween(double start, double end);
+//    List<Product> findProductByPriceBetween(double start, double end);
     Product findProductById(Long id);
 
-    Product deleteProductById(Long id);
+
 
 
 

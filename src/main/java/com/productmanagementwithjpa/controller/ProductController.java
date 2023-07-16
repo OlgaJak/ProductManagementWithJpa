@@ -59,19 +59,34 @@ public class ProductController {
         return "redirect:/";
     }
 
-//    @DeleteMapping("/product/delete/{id}")
-//    public String deleteProduct(@PathVariable("id") Long id) {
-//        this.productRepository.deleteProductById(id);
-//        return "redirect:/";
-//    }
+    @GetMapping("/product/edit/{id}")
+    public String displayEditProductPage(@PathVariable Long id, Model model) {
+        Product product = this.productRepository.findById(id).orElse(null);
+        if (product == null) {
+            // Handle the case when the product is not found
+            return "redirect:/";
+        }
+        model.addAttribute("product", product);
+        return "edit-product";
+    }
 
+    @PostMapping("/product/edit/{id}")
+    public String handleEditProduct(@PathVariable("id") Long id, ProductRequest productRequest) {
+        Product existingProduct = this.productRepository.findById(id).orElse(null);
+        if (existingProduct == null) {
+            // Handle the case when the product is not found
+            return "redirect:/";
+        }else{
 
-//    @GetMapping("/delete/{id}")
-//    public String showDeleteConfirmation(@PathVariable Long id, Model model) {
-//        Product productToDelete = this.productRepository.findProductById(id);
-//        model.addAttribute("product", productToDelete);
-//        return "delete-product";
-//    }
+        // Update the existing product with the new information
+        existingProduct.setName(productRequest.getName());
+        existingProduct.setPrice(productRequest.getPrice());
+        existingProduct.setQuantity(productRequest.getQuantity());
+        existingProduct.setImageUrl(productRequest.getImageUrl());
+
+        this.productRepository.save(existingProduct);
+        return "all-products";}
+    }
 
 
 

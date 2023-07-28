@@ -59,35 +59,50 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @GetMapping("/product/edit/{id}")
-    public String displayEditProductPage(@PathVariable Long id, Model model) {
-        Product product = this.productRepository.findById(id).orElse(null);
-        if (product == null) {
-            // Handle the case when the product is not found
-            return "redirect:/";
-        }
-        model.addAttribute("product", product);
+//    @GetMapping("/product/edit/{id}")
+//    public String displayEditProductPage(@PathVariable Long id, Model model) {
+//        Product product = this.productRepository.findById(id).orElse(null);
+//        if (product == null) {
+//            // Handle the case when the product is not found
+//            return "redirect:/";
+//        }
+//        model.addAttribute("product", product);
+//        return "edit-product";
+//    }
+//
+//    @PostMapping("/product/edit/{id}")
+//    public String handleEditProduct(@PathVariable("id") Long id, ProductRequest productRequest) {
+//        Product existingProduct = this.productRepository.findById(id).orElse(null);
+//        if (existingProduct == null) {
+//            // Handle the case when the product is not found
+//            return "redirect:/";
+//        }else{
+//
+//        // Update the existing product with the new information
+//        existingProduct.setName(productRequest.getName());
+//        existingProduct.setPrice(productRequest.getPrice());
+//        existingProduct.setQuantity(productRequest.getQuantity());
+//        existingProduct.setImageUrl(productRequest.getImageUrl());
+//
+//        this.productRepository.save(existingProduct);
+//        return "all-products";}
+//    }
+
+    @GetMapping("product/edit/{id}")
+    public String editProduct(@PathVariable Long id, Model model){
+        Product producToEdit = this.productRepository.findById(id).orElseThrow();
+        model.addAttribute("product", producToEdit);
         return "edit-product";
     }
-
-    @PostMapping("/product/edit/{id}")
-    public String handleEditProduct(@PathVariable("id") Long id, ProductRequest productRequest) {
-        Product existingProduct = this.productRepository.findById(id).orElse(null);
-        if (existingProduct == null) {
-            // Handle the case when the product is not found
-            return "redirect:/";
-        }else{
-
-        // Update the existing product with the new information
-        existingProduct.setName(productRequest.getName());
-        existingProduct.setPrice(productRequest.getPrice());
-        existingProduct.setQuantity(productRequest.getQuantity());
-        existingProduct.setImageUrl(productRequest.getImageUrl());
-
+    @PostMapping("product/edit")
+    public String updateProduct(@ModelAttribute("product") Product updatedProduct){
+        Product existingProduct = this.productRepository.findById(updatedProduct.getId()).orElseThrow();
+        existingProduct.setName(updatedProduct.getName());
+        existingProduct.setPrice(updatedProduct.getPrice());
+        existingProduct.setQuantity(updatedProduct.getQuantity());
+        existingProduct.setImageUrl(updatedProduct.getImageUrl());
         this.productRepository.save(existingProduct);
-        return "all-products";}
+        return "redirect:/";
     }
-
-
 
 }
